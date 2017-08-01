@@ -8,14 +8,10 @@ Multi-Robot Systems Testbed
 ## Citation ##
 If you are considering using this code, please reference the following:
 ```
-@Online{yz15testbed,
-  hyphenation = {american},
-  author      = {Zhi Yan and Luc Fabresse and Jannik Laval and and Noury Bouraqadi},
-  title       = {Building a ROS-based Testbed for Realistic Multi-robot Simulation},
-  version     = {1},
-  date        = {2017-07-26},
-  eprinttype  = {arxiv},
-  eprintclass = {cs.DS},
-  eprint      = {1008.2849v1}
+@misc{yz17testbed,
+  author = {Zhi Yan and Luc Fabresse and Jannik Laval and and Noury Bouraqadi},
+  title = {Building a ROS-based Testbed for Realistic Multi-robot Simulation},
+  year = {2017},
+  note = {arXiv:1510.01797}
 }
 ```
