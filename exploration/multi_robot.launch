@@ -1,0 +1,173 @@
+<launch>
+  <arg name="robot_launch" value="$(env PWD)/ros/launch/pioneer3dx.launch"/>
+  <!-- <param name="/use_sim_time" value="true"/> -->
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py $(find p2os_urdf)/defs/pioneer3dx.xacro"/> -->
+  
+  <!-- ROBOT 0 -->
+  <arg name="0" default="false"/>
+  <group ns="p3dx0" if="$(arg 0)">
+    <param name="tf_prefix" value="p3dx0_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="0"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="38.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 1 -->
+  <arg name="1" default="false"/>
+  <group ns="p3dx1" if="$(arg 1)">
+    <param name="tf_prefix" value="p3dx1_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="1"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="36.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 2 -->
+  <arg name="2" default="false"/>
+  <group ns="p3dx2" if="$(arg 2)">
+    <param name="tf_prefix" value="p3dx2_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="2"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="34.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 3 -->
+  <arg name="3" default="false"/>
+  <group ns="p3dx3" if="$(arg 3)">
+    <param name="tf_prefix" value="p3dx3_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="3"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="32.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 4 -->
+  <arg name="4" default="false"/>
+  <group ns="p3dx4" if="$(arg 4)">
+    <param name="tf_prefix" value="p3dx4_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="4"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="30.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 5 -->
+  <arg name="5" default="false"/>
+  <group ns="p3dx5" if="$(arg 5)">
+    <param name="tf_prefix" value="p3dx5_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="5"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="28.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 6 -->
+  <arg name="6" default="false"/>
+  <group ns="p3dx6" if="$(arg 6)">
+    <param name="tf_prefix" value="p3dx6_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="6"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="26.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 7 -->
+  <arg name="7" default="false"/>
+  <group ns="p3dx7" if="$(arg 7)">
+    <param name="tf_prefix" value="p3dx7_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="7"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="24.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 8 -->
+  <arg name="8" default="false"/>
+  <group ns="p3dx8" if="$(arg 8)">
+    <param name="tf_prefix" value="p3dx8_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="8"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="22.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 9 -->
+  <arg name="9" default="false"/>
+  <group ns="p3dx9" if="$(arg 9)">
+    <param name="tf_prefix" value="p3dx9_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="9"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="20.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 10 -->
+  <arg name="10" default="false"/>
+  <group ns="p3dx10" if="$(arg 10)">
+    <param name="tf_prefix" value="p3dx10_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="10"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="18.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 11 -->
+  <arg name="11" default="false"/>
+  <group ns="p3dx11" if="$(arg 11)">
+    <param name="tf_prefix" value="p3dx11_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="11"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="16.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 12 -->
+  <arg name="12" default="false"/>
+  <group ns="p3dx12" if="$(arg 12)">
+    <param name="tf_prefix" value="p3dx12_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="12"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="14.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+  
+  <!-- ROBOT 13 -->
+  <arg name="13" default="false"/>
+  <group ns="p3dx13" if="$(arg 13)">
+    <param name="tf_prefix" value="p3dx13_tf"/>
+    <include file="$(arg robot_launch)">
+      <arg name="n" value="13"/>
+      <arg name="x" value="-38.0"/>
+      <arg name="y" value="12.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group>
+</launch>

@@ -1,0 +1,123 @@
+<launch>
+  <arg name="n"/>
+  <arg name="x"/>
+  <arg name="y"/>
+  <arg name="z"/>
+  
+  <!-- <remap from="/tf" to="/p3dx$(arg n)_tf"/> IF WE USE tf_splitter -->
+  <param name="tf_prefix" value="/p3dx$(arg n)_tf"/>
+  
+  <!-- robot_state_publisher and p2os_urdf need to be commented out in the experiment to save network bandwidth.
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen"/>
+  <node pkg="p2os_urdf" type="publisher" name="publisher" output="screen"/>
+   -->
+  <!-- Publish robot pose: http://www.ai.univ-paris8.fr/~yz/ -->
+  <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" output="screen"/>
+  
+  <!-- Transformation only for correctly display in RVIZ
+  <node pkg="tf" type="static_transform_publisher" name="map" args="0 0 0 0 0 0 /world map 100"/>
+   -->
+  <!-- **************************************************************************** -->
+  <!-- ****** Transformation requirements: [REP105] map -> odom -> base_link ****** -->
+  <!-- Costmap_2d requires a transformation from /base_link to /map -->
+  <node pkg="tf" type="static_transform_publisher" name="base_laser_link" args="0 0 0.252 0 0 0 base_link base_laser_link 100" output="screen"/>
+  <!-- The odometry sensor in MORSE automatically publishes the TF transformation between the /odom and /base_footprint frames -->
+  <node pkg="tf" type="static_transform_publisher" name="base_link" args="0 0 0 0 0 0 base_footprint base_link 100" output="screen"/>
+  
+  <!-- LOCALIZATION METHOD 0: frame transformation -->
+  <!-- Make sure that "fake_localization" param in "zcoordination" node has been set to "true".
+  <node pkg="tf" type="static_transform_publisher" name="odom" args="$(arg x) $(arg y) $(arg z) 0 0 0 map odom 100" output="screen"/>
+   -->
+  <!-- LOCALIZATION METHOD 1: fake AMCL
+       <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen">
+       <remap from="base_pose_ground_truth" to="/p3dx$(arg n)/odom$(arg n)"/>
+       
+       <param name="base_frame_id" value="base_link"/>
+       <param name="global_frame_id" value="map"/>
+       <param name="odom_frame_id" value="odom"/>
+       
+       <param name="delta_x" value="-$(arg x)"/>
+       <param name="delta_y" value="-$(arg y)"/>
+       <param name="delta_yaw" value="0.0"/>
+       </node>
+  -->
+  <!-- Localization 2: SLAM -->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <remap from="scan" to="/p3dx$(arg n)/sick$(arg n)"/>
+    
+    <param name="base_frame" value="base_link"/>
+    <param name="map_frame" value="map"/>
+    <param name="odom_frame" value="odom"/>
+    
+    <param name="maxRange" value="26.0"/>
+    <param name="maxUrange" value="25.0"/>
+    
+    <param name="xmin" value="-80.0"/>
+    <param name="xmax" value="80.0"/>
+    <param name="ymin" value="-80.0"/>
+    <param name="ymax" value="80.0"/>
+    <param name="delta" value="0.20"/>
+    
+    <param name="transform_publish_period" value="0.1"/>
+  </node>
+  
+  <!-- ********************* Transformation requirements: END ********************* -->
+  <!-- **************************************************************************** -->
+  
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <remap from="base_scan" to="/p3dx$(arg n)/sick$(arg n)"/>
+    <remap from="odom" to="/p3dx$(arg n)/odom$(arg n)"/>
+    <remap from="cmd_vel" to="/p3dx$(arg n)/motion$(arg n)"/>
+    
+    <param name="controller_frequency" value="10.0"/>
+    
+    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(env PWD)/ros/yaml/global_costmap.yaml" command="load"/>
+    <rosparam file="$(env PWD)/ros/yaml/navfn.yaml" command="load"/>
+    
+    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(env PWD)/ros/yaml/local_costmap.yaml" command="load"/>
+    <rosparam file="$(env PWD)/ros/yaml/trajectory_planner.yaml" command="load"/>
+  </node>
+  
+  <node pkg="zexploration" type="zexploration" respawn="false" name="zexploration" output="screen">
+    <remap from="base_scan" to="/p3dx$(arg n)/sick$(arg n)"/>
+    <remap from="slam_entropy" to="slam_gmapping/entropy"/>
+    
+    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="explore_costmap"/>
+    <rosparam file="$(env PWD)/ros/yaml/explore_costmap.yaml" command="load"/>
+    
+    <param name="progress_timeout" value="3.0"/>
+    <param name="inscribed_scale" value="10.0"/>
+    <param name="potential_scale" value="0.005"/>
+    <param name="orientation_scale" value="0.0"/>
+    <param name="gain_scale" value="1.0"/>
+    <param name="close_loops" value="true"/>
+    
+    <param name="multi_robot" value="true"/>
+    <param name="basic_model" value="false"/>
+    
+    <param name="use_gmapping_map" value="true"/>
+    <param name="fusion_map_topic" value="zcoordination/map"/>
+  </node>
+  
+  <node pkg="zcoordination" type="zcoordination" name="zcoordination" output="screen">
+    <param name="coordination_rate" value="10"/>
+    
+    <param name="decision_making_type" value="decentralized"/>
+    <param name="max_comm_distance" value="200.0"/>
+    <param name="init_pose_x" value="$(arg x)"/>
+    <param name="init_pose_y" value="$(arg y)"/>
+    <param name="init_pose_z" value="$(arg z)"/>
+    <param name="map_topic" value="map"/>
+    <param name="map_fusion_method" value="greedy"/>
+    <param name="fake_localization" value="false"/>
+    <!--
+	<param name="decision_making_type" value="centralized"/>
+	<param name="device_type" value="robot"/>
+	<param name="init_pose_x" value="$(arg x)"/>
+	<param name="init_pose_y" value="$(arg y)"/>
+	<param name="init_pose_z" value="$(arg z)"/>
+    -->
+  </node>
+</launch>
