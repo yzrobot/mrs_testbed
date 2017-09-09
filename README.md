@@ -2,7 +2,7 @@
 
 This testbed includes:
 - ROS packages for multi-robot exploration
-- MORSE simulation scenarios
+- [MORSE](https://github.com/morse-simulator/morse) simulation scenarios
 - Scripts for autonomous deployment of the infrastructure and experiments
 
 To have a general idea, please refer to the videos below, respectively showing simulated and real robot exploration:
