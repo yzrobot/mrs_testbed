@@ -1,0 +1,19 @@
+<launch>
+  <param name="robot_description" command="cat $(env PWD)/pr2.urdf"/>
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+  
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <remap from="scan" to="/pr2/scan"/>
+    
+    <param name="maxUrange" value="29.0"/>
+    <param name="particles" value="30"/>
+    
+    <param name="delta" value="0.20"/>
+    <param name="xmin" value="-30.0"/>
+    <param name="xmax" value="30.0"/>
+    <param name="ymin" value="-30.0"/>
+    <param name="ymax" value="30.0"/>
+  </node>
+  
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(env PWD)/mapping.rviz"/>
+</launch>
