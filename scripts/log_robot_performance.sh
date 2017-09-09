@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### Copyright (C) 2014 Zhi Yan
+
 LOG_FILE_NAME="team$1_test$2_robot$3.csv"
 LOG_FILE_PATH="/media/sf_scratch/$4/log"
 LOG_FREQUENCY=5 # record once every LOG_FREQUENCY seconds
