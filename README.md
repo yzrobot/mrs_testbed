@@ -24,4 +24,6 @@ If you are considering using these resources, please reference the following:
 
 ## Overview ##
 
-![alt tag](https://github.com/yzrobot/mrs_testbed/blob/master/images/architecture.png)
+![alt tag](https://github.com/yzrobot/mrs_testbed/blob/master/architecture.png)
+
+The testbed is composed of four parts: a simulator, a monitor, a set of robot controllers, and the ROS middleware used to connect all of them. In particular, we use the MORSE 3D realistic simulator and wrap it up into a ROS node. The monitor is also performed as a ROS node, which allows us to supervise the experimental processes. Specifically, it can stop the experiment when the stop condition is triggered, collect measurement data and compute the metrics afterwards.
