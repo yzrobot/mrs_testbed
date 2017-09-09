@@ -1,3 +1,7 @@
+#!/bin/bash
+
+### Copyright (C) 2014 Zhi Yan
+
 NFS_BUG_TIMER=0
 NFS_BUG_TIMEOUT=30
 
@@ -135,7 +139,7 @@ do
     ### IF the route for CHAPO is changed, DO ###
     # ssh $ROBOT_PROTOTYPE_USER@$ROBOT_PROTOTYPE_IP "echo -e \"\nauto eth0\niface eth0 inet static\naddress ${ROBOT_IP_LIST[$i]}\nnetmask 255.255.0.0\ngateway 10.3.0.1\ndns-nameservers 10.3.11.1\npost-up route add -net 10.1.0.0 netmask 255.255.0.0 gw 10.3.11.1\n\" | sudo tee -a /etc/network/interfaces; sudo shutdown -h now"
     ### IF NOT ###
-    ssh $ROBOT_PROTOTYPE_USER@$ROBOT_PROTOTYPE_IP "echo -e \"\nauto eth0\niface eth0 inet static\naddress ${ROBOT_IP_LIST[$i]}\nnetmask 255.255.0.0\ngateway 10.3.0.1\ndns-nameservers 10.3.11.1\n\" | sudo tee -a /etc/network/interfaces; sudo shutdown -h now"
+    ssh $ROBOT_PROTOTYPE_USER@$ROBOT_PROTOTYPE_IP 'echo -e \"\nauto eth0\niface eth0 inet static\naddress ${ROBOT_IP_LIST[$i]}\nnetmask 255.255.0.0\ngateway 10.3.0.1\ndns-nameservers 10.3.11.1\n\" | sudo tee -a /etc/network/interfaces; sudo shutdown -h now'
     ### END IF ###
     echo "robot_${HOSTNAME%%.*}_$i was set a new IP address: ${ROBOT_IP_LIST[$i]}."
     
