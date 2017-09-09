@@ -323,10 +323,10 @@ SCRIPT_HOME=$PWD" > vm_setup_header.sh
     chmod a+x $PWD/robot/vm_setup_$node_name.sh
     echo "done!"
     
-    ssh $node_name "[ -d $ROBOT_DEPLOYMENT_PATH ] || mkdir -p $ROBOT_DEPLOYMENT_PATH"
+    ssh $node_name '[ -d $ROBOT_DEPLOYMENT_PATH ] || mkdir -p $ROBOT_DEPLOYMENT_PATH'
     scp $PWD/log_robot_performance.sh $PWD/robot/vm_setup_$node_name.sh $node_name:$ROBOT_DEPLOYMENT_PATH
     [ -f $PWD/log/vm_setup_$node_name.log ] && rm log/vm_setup_$node_name.log # Important! To avoid synchronization error for VM_SETUP_FAILS/VM_SETUP_COMPLETED test.
-    ssh -f $node_name "$SHELL $ROBOT_DEPLOYMENT_PATH/vm_setup_$node_name.sh > $PWD/log/vm_setup_$node_name.log 2>&1"
+    ssh -f $node_name '$SHELL $ROBOT_DEPLOYMENT_PATH/vm_setup_$node_name.sh > $PWD/log/vm_setup_$node_name.log 2>&1'
     echo "===> Deploying robot(s) on $node_name ......"
     
     NODE_NAME_INDEX=$(( NODE_NAME_INDEX + 1 ))
@@ -388,7 +388,7 @@ p3dx$i.add_default_interface('ros')
 p3dx$i.translate(x=$ROBOT_INIT_POSE_X, y=$ROBOT_INIT_POSE_Y, z=$ROBOT_INIT_POSE_Z)
 
 odom$i = Odometry()
-odom$i.add_interface('ros', frame_id='/p3dx"$i"_tf/odom', child_frame_id='/p3dx"$i"_tf/base_footprint')" >> $PWD/morse/$SIM_ENV_NAME.py
+odom$i.add_interface('ros', frame_id='/p3dx$i_tf/odom', child_frame_id='/p3dx$i_tf/base_footprint')" >> $PWD/morse/$SIM_ENV_NAME.py
     [ $ODOMETRY_NOISE == "true" ] && echo "odom$i.alter('Noise', pos_std=0.022, rot_std=0.02)" >> $PWD/morse/$SIM_ENV_NAME.py
     echo "odom$i.frequency(10)
 p3dx$i.append(odom$i)
