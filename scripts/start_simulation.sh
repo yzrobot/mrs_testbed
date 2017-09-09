@@ -260,7 +260,7 @@ echo "
 NODE_ALLOCATION_LIST=()
 if [ $DEBUG_MODE == "false" ]
 then
-    NODES=`sort -u $PBS_NODEFILE`
+    NODES=$(sort -u $PBS_NODEFILE)
     for node_name in $NODES
     do
 	NODE_ALLOCATION_LIST+=(${node_name})
