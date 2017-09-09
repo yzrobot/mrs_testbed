@@ -11,10 +11,10 @@
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen"/>
   <node pkg="p2os_urdf" type="publisher" name="publisher" output="screen"/>
    -->
-  <!-- Publish robot pose: http://www.ai.univ-paris8.fr/~yz/ -->
+  <!-- publish robot pose -->
   <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" output="screen"/>
   
-  <!-- Transformation only for correctly display in RVIZ
+  <!-- transformation only for correctly display in RVIZ
   <node pkg="tf" type="static_transform_publisher" name="map" args="0 0 0 0 0 0 /world map 100"/>
    -->
   <!-- **************************************************************************** -->
@@ -71,21 +71,21 @@
     
     <param name="controller_frequency" value="10.0"/>
     
-    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="global_costmap"/>
-    <rosparam file="$(env PWD)/ros/yaml/global_costmap.yaml" command="load"/>
-    <rosparam file="$(env PWD)/ros/yaml/navfn.yaml" command="load"/>
+    <rosparam file="$(env PWD)/yaml/costmap_common_p3dx.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(env PWD)/yaml/global_costmap.yaml" command="load"/>
+    <rosparam file="$(env PWD)/yaml/navfn.yaml" command="load"/>
     
-    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="local_costmap"/>
-    <rosparam file="$(env PWD)/ros/yaml/local_costmap.yaml" command="load"/>
-    <rosparam file="$(env PWD)/ros/yaml/trajectory_planner.yaml" command="load"/>
+    <rosparam file="$(env PWD)/yaml/costmap_common_p3dx.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(env PWD)/yaml/local_costmap.yaml" command="load"/>
+    <rosparam file="$(env PWD)/yaml/trajectory_planner.yaml" command="load"/>
   </node>
   
   <node pkg="zexploration" type="zexploration" respawn="false" name="zexploration" output="screen">
     <remap from="base_scan" to="/p3dx$(arg n)/sick$(arg n)"/>
     <remap from="slam_entropy" to="slam_gmapping/entropy"/>
     
-    <rosparam file="$(env PWD)/ros/yaml/costmap_common_p3dx.yaml" command="load" ns="explore_costmap"/>
-    <rosparam file="$(env PWD)/ros/yaml/explore_costmap.yaml" command="load"/>
+    <rosparam file="$(env PWD)/yaml/costmap_common_p3dx.yaml" command="load" ns="explore_costmap"/>
+    <rosparam file="$(env PWD)/yaml/explore_costmap.yaml" command="load"/>
     
     <param name="progress_timeout" value="3.0"/>
     <param name="inscribed_scale" value="10.0"/>

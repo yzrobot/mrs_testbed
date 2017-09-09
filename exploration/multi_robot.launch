@@ -1,5 +1,5 @@
 <launch>
-  <arg name="robot_launch" value="$(env PWD)/ros/launch/pioneer3dx.launch"/>
+  <arg name="robot_launch" value="$(env PWD)/pioneer3dx.launch"/>
   <!-- <param name="/use_sim_time" value="true"/> -->
   <!-- <param name="robot_description" command="$(find xacro)/xacro.py $(find p2os_urdf)/defs/pioneer3dx.xacro"/> -->
   
