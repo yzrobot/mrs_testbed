@@ -37,7 +37,7 @@ p3dx0.append(motion0)
 #p3dx0.append(clock)
 
 ################ ENVIRONMENT ###############
-env = Environment('/home/car/Desktop/ExplorationDemo/morse/maze', fastmode=False)
+env = Environment('../MORSE/scenarios/maze', fastmode=False)
 env.place_camera([0, 0, 60])
 env.aim_camera([0, 0, 0])
 #env.set_time_strategy(TimeStrategies.FixedSimulationStep)

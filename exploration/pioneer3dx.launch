@@ -80,9 +80,10 @@
     <rosparam file="$(env PWD)/yaml/trajectory_planner.yaml" command="load"/>
   </node>
   
-  <node pkg="zexploration" type="zexploration" respawn="false" name="zexploration" output="screen">
+  <node pkg="explore_multirobot" type="explore_multirobot" name="explore_multirobot" output="screen" respawn="false">
     <remap from="base_scan" to="/p3dx$(arg n)/sick$(arg n)"/>
     <remap from="slam_entropy" to="slam_gmapping/entropy"/>
+    <remap from="map" to="map_merging/map"/>
     
     <rosparam file="$(env PWD)/yaml/costmap_common_p3dx.yaml" command="load" ns="explore_costmap"/>
     <rosparam file="$(env PWD)/yaml/explore_costmap.yaml" command="load"/>
@@ -93,31 +94,14 @@
     <param name="orientation_scale" value="0.0"/>
     <param name="gain_scale" value="1.0"/>
     <param name="close_loops" value="true"/>
-    
-    <param name="multi_robot" value="true"/>
-    <param name="basic_model" value="false"/>
-    
-    <param name="use_gmapping_map" value="true"/>
-    <param name="fusion_map_topic" value="zcoordination/map"/>
   </node>
   
-  <node pkg="zcoordination" type="zcoordination" name="zcoordination" output="screen">
-    <param name="coordination_rate" value="10"/>
-    
-    <param name="decision_making_type" value="decentralized"/>
-    <param name="max_comm_distance" value="200.0"/>
+  <node pkg="map_merging" type="map_merging" name="map_merging" output="screen" respawn="false">
+    <param name="max_comm_distance" value="100.0"/>
     <param name="init_pose_x" value="$(arg x)"/>
     <param name="init_pose_y" value="$(arg y)"/>
     <param name="init_pose_z" value="$(arg z)"/>
     <param name="map_topic" value="map"/>
     <param name="map_fusion_method" value="greedy"/>
-    <param name="fake_localization" value="false"/>
-    <!--
-	<param name="decision_making_type" value="centralized"/>
-	<param name="device_type" value="robot"/>
-	<param name="init_pose_x" value="$(arg x)"/>
-	<param name="init_pose_y" value="$(arg y)"/>
-	<param name="init_pose_z" value="$(arg z)"/>
-    -->
   </node>
 </launch>

@@ -169,6 +169,6 @@ motion6.add_interface('ros')
 p3dx6.append(motion6)
 
 ################ ENVIRONMENT ###############
-env = Environment('/home/car/Desktop/ExplorationDemo/morse/maze', fastmode=False)
+env = Environment('../MORSE/scenarios/maze', fastmode=False)
 env.place_camera([0, 0, 60])
 env.aim_camera([0, 0, 0])
