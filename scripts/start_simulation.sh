@@ -398,7 +398,7 @@ sick$i.translate(z=0.252)
 sick$i.properties(Visible_arc=True)
 sick$i.properties(scan_window=190)
 sick$i.properties(laser_range=26.0)
-sick$i.add_interface('ros', frame_id='/p3dx"$i"_tf/base_laser_link')
+sick$i.add_interface('ros', frame_id='/p3dx$i_tf/base_laser_link')
 sick$i.frequency(25)
 p3dx$i.append(sick$i)
 
@@ -449,7 +449,7 @@ sleep 3" > $PWD/clean/kill_run.sh
 
 scp $PWD/morse/$SIM_ENV_NAME.* $MORSE_USER@$MORSE_HOST:$MORSE_FILE_PATH
 echo "===> Simulation files have been copied to \"$MORSE_USER@$MORSE_HOST:$MORSE_FILE_PATH\"."
-ssh -f $MORSE_USER@$MORSE_HOST "DISPLAY=:0 $MORSE_FILE_PATH/$SIM_ENV_NAME.sh"
+ssh -f $MORSE_USER@$MORSE_HOST 'DISPLAY=:0 $MORSE_FILE_PATH/$SIM_ENV_NAME.sh'
 echo "===> MORSE has been launched on \"$MORSE_HOST\"."
 echo "===> Monitor has been launched on \"$MORSE_HOST\"."
 ##############################################################
@@ -464,7 +464,7 @@ do
 echo -ne \"\\033[31m===> robot_${node_name}_$i OFF \\033[0m\"
 ssh $node_name \"export VBOX_USER_HOME=$ROBOT_DEPLOYMENT_PATH/vm; vboxmanage controlvm robot_${node_name}_$i poweroff\"" >> $PWD/clean/kill_run.sh
 	
-	ssh $node_name "export VBOX_USER_HOME=$ROBOT_DEPLOYMENT_PATH/vm; vboxmanage startvm robot_${node_name}_$i --type headless"
+	ssh $node_name 'export VBOX_USER_HOME=$ROBOT_DEPLOYMENT_PATH/vm; vboxmanage startvm robot_${node_name}_$i --type headless'
 	BOOTED_ROBOTS=$(( BOOTED_ROBOTS + 1 ))
 	[ $BOOTED_ROBOTS -ge $n_robots ] && break
     done
@@ -503,7 +503,7 @@ do
     set_robot_init_pose $i
     if [ ${READY_ROBOTS_TABLE[i]} == "true" ]
     then
-	ssh -f $ROBOT_PROTOTYPE_USER@${ROBOT_IP_LIST[$i]} "rm -rf /home/viki/.ros/log; /media/sf_scratch/${HOME##*/}/log_robot_performance.sh $n_robots $trial_id $i ${HOME##*/}; roslaunch /home/viki/Desktop/car_mrs_explore/launch/pioneer3dx.launch i:=$i x:=$ROBOT_INIT_POSE_X y:=$ROBOT_INIT_POSE_Y z:=$ROBOT_INIT_POSE_Z" > /dev/null 2>&1
+	ssh -f $ROBOT_PROTOTYPE_USER@${ROBOT_IP_LIST[$i]} 'rm -rf /home/viki/.ros/log; /media/sf_scratch/${HOME##*/}/log_robot_performance.sh $n_robots $trial_id $i ${HOME##*/}; roslaunch /home/viki/Desktop/car_mrs_explore/launch/pioneer3dx.launch i:=$i x:=$ROBOT_INIT_POSE_X y:=$ROBOT_INIT_POSE_Y z:=$ROBOT_INIT_POSE_Z' > /dev/null 2>&1
 	echo "===> Robot ${ROBOT_IP_LIST[$i]} has been launched at ($ROBOT_INIT_POSE_X, $ROBOT_INIT_POSE_Y, $ROBOT_INIT_POSE_Z)."
     else
 	echo "===> Robot ${ROBOT_IP_LIST[$i]} can not be launched."
@@ -552,12 +552,12 @@ mkdir -p $EXPERIMENTAL_RESULTS_PATH/system_metric
 mkdir -p $EXPERIMENTAL_RESULTS_PATH/robot_metric
 
 scp $MORSE_USER@$MORSE_HOST:$MONITOR_LOG_PATH/* $EXPERIMENTAL_RESULTS_PATH/system_metric
-ssh $MORSE_USER@$MORSE_HOST "rm -rf $MONITOR_LOG_PATH"
+ssh $MORSE_USER@$MORSE_HOST 'rm -rf $MONITOR_LOG_PATH'
 
 for node_name in ${NODE_ALLOCATION_LIST[*]}
 do
     scp $node_name:$ROBOT_DEPLOYMENT_PATH/log/* $EXPERIMENTAL_RESULTS_PATH/robot_metric
-    ssh $node_name "rm -rf $ROBOT_DEPLOYMENT_PATH/log"
+    ssh $node_name 'rm -rf $ROBOT_DEPLOYMENT_PATH/log'
 done
 
 echo "===> Experimental results are stored in $EXPERIMENTAL_RESULTS_PATH."
