@@ -11,6 +11,7 @@ To have a general idea, please refer to the videos below, respectively showing s
 [![YouTube Video 2](https://img.youtube.com/vi/xCW0WT_G5OA/0.jpg)](https://www.youtube.com/watch?v=xCW0WT_G5OA)
 
 ## Citation ##
+
 If you are considering using these resources, please reference the following:
 ```
 @article{yz17robotics,
@@ -23,3 +24,4 @@ If you are considering using these resources, please reference the following:
 
 ## Overview ##
 
+![alt tag](https://github.com/yzrobot/mrs_testbed/blob/master/images/architecture.png)
