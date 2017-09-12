@@ -21,7 +21,10 @@ If you are considering using these resources, please reference the following:
   author = {Zhi Yan and Luc Fabresse and Jannik Laval and and Noury Bouraqadi},
   title = {Building a ROS-based Testbed for Realistic Multi-robot Simulation: Taking the Exploration as an Example},
   year = {2017},
-  journal = {Robotics}
+  journal = {Robotics},
+  volume = {6},
+  number = {3},
+  pages = {1--21}
 }
 ```
 
