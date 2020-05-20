@@ -1,7 +1,7 @@
 # Multi-robot Exploration Testbed #
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/284218c077b44d3f8bedc1152e0f11d0)](https://www.codacy.com/app/yzrobot/mrs_testbed?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yzrobot/mrs_testbed&amp;utm_campaign=Badge_Grade)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 This testbed includes:
 - [ROS](http://wiki.ros.org/) packages for multi-robot exploration
