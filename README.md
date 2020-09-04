@@ -18,7 +18,7 @@ To have a general idea, please refer to the videos below, respectively showing s
 If you are considering using these resources, please reference the following:
 ```
 @article{yz17robotics,
-  author = {Zhi Yan and Luc Fabresse and Jannik Laval and and Noury Bouraqadi},
+  author = {Zhi Yan and Luc Fabresse and Jannik Laval and Noury Bouraqadi},
   title = {Building a ROS-based Testbed for Realistic Multi-robot Simulation: Taking the Exploration as an Example},
   year = {2017},
   journal = {Robotics},
